@@ -1,0 +1,76 @@
+{% extends 'first.html' %}
+
+{% block content %}
+  <style>
+    /* CSS Styles for the Register form */
+    h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .messages {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .messages li {
+      color: #ff0000; /* Change the color of flash messages */
+    }
+  </style>
+
+  <h2>Register Details</h2>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <form method="post" action="{{ url_for('user_register') }}">
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter username" required> <br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Enter password" required><br><br>
+    
+    <button type="submit">Register</button><br><br></form>
+  <form action="{{url_for('login')}}"><button type="submit">Login</button></form>
+{% endblock %}

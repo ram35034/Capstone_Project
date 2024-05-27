@@ -1,0 +1,104 @@
+{% extends 'first.html' %}
+
+{% block content %}
+
+<style>
+  /* CSS styles */
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<h1>Form update</h1>
+
+<form id="form_data" action="" method="post">
+  <table>
+    {% if task %}
+    <tr>
+      <td><label for="title">Title:</label></td>
+      <td><input type="text" id="title" name="title" value="{{ task.task_title }}"></td>
+    </tr>
+    <tr>
+      <td><label for="complexity">Complexity:</label></td>
+      <td>
+        <select id="complexity" name="complexity">
+          <option value="high" {% if task.complexity == 'high' %}selected{% endif %}>High</option>
+          <option value="medium" {% if task.complexity == 'medium' %}selected{% endif %}>Medium</option>
+          <option value="low" {% if task.complexity == 'low' %}selected{% endif %}>Low</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="size">Size:</label></td>
+      <td>
+        <select id="size" name="size">
+          <option value="small" {% if task.size == 'small' %}selected{% endif %}>Small</option>
+          <option value="medium" {% if task.size == 'medium' %}selected{% endif %}>Medium</option>
+          <option value="large" {% if task.size == 'large' %}selected{% endif %}>Large</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="type">Type:</label></td>
+      <td>
+        <select id="type" name="type">
+          <option value="development" {% if task.type_of_task == 'development' %}selected{% endif %}>Development</option>
+          <option value="testing" {% if task.type_of_task == 'testing' %}selected{% endif %}>Testing</option>
+          <option value="deployment" {% if task.type_of_task == 'deployment' %}selected{% endif %}>Deployment</option>
+          <option value="documentation" {% if task.type_of_task == 'documentation' %}selected{% endif %}>Documentation</option>
+        </select>
+      </td>
+    </tr>
+    {% endif %}
+  </table>
+
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+{% endblock %}

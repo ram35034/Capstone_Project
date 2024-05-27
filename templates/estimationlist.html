@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimation List</title>
+    <style>
+        /* CSS Styles for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color:violet;
+        }
+    </style>
+</head>
+<body>
+    <h2>Estimation List</h2>
+    
+    <table border =2>
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Complexity</th>
+                <th>Size</th>
+                <th>Type of Task</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estimation in estimationdata%}
+            <tr>
+                <td>{{ estimation.task_title }}</td>
+                <td>{{ estimation.complexity }}</td>
+                <td>{{ estimation.size }}</td>
+                <td>{{ estimation.type_of_task }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

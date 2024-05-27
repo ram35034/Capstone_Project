@@ -1,0 +1,86 @@
+{% extends 'first.html' %}
+
+{% block content %}
+<h2>Fill required fields for estimation</h2>
+  <style>
+    /* CSS Styles for the Task Submission form */
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    button[type="button"] {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button[type="button"]:hover {
+      background-color: #c82333;
+    }
+  </style>
+  <a href="/logout"> Logout </a>
+  <form action="{{ url_for('estimation') }}" method="post">
+    <label for="taskName">Task Name:</label>
+    <input type="text" id="taskName" name="taskName" required><br><br>
+    
+    <label for="complexity">Complexity:</label>
+    <select id="complexity" name="complexity">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select><br><br>
+
+    <label for="size">Size:</label>
+    <select id="size" name="size">
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select><br><br>
+
+    <label for="taskType">Type of Task:</label>
+    <select id="taskType" name="taskType">
+      <option value="design">Design</option>
+      <option value="development">Development</option>
+      <option value="testing">Testing</option>
+      <option value="documentation">Documentation</option>
+      <option value="other">Other</option>
+    </select><br><br>
+
+    <input type="submit" value="Submit Task">
+  </form>
+
+
+{% endblock %}
