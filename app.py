@@ -3,16 +3,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
 # from datetime import timedelta
 from bson import ObjectId
-# from flask_jwt import  jwt_required
-# from collections.abc import Mapping
-# >>> import secrets 
-# >>> secrets.token_hex(12)
+
 #Created flask instance
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = '138fc9bfe8249a88c7468e12'
 
-# app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=3600)
-# app.config['JWT_TOKEN_LOCATION'] = ['headers', 'query_string']
 #Creats the Database and initialized.
 client = MongoClient('localhost', 27017)
 db = client['estimationdb1'] 
@@ -51,14 +45,10 @@ def login():
             return jsonify('user not found')
         if  user and check_password_hash(user['password'],password):
             return redirect(url_for('estimation'))
-        # return jsonify('Login successful.', 'success')
         else:
             return jsonify('Invalid user')
     return render_template('login.html')
 
-@app.route('/success',methods=['GET'])
-def success():
-    return "User sucessfully registerd login"
 #Creats the estimation fieds
 @app.route('/estimation',methods=['GET','POST'])
 def estimation():
@@ -80,7 +70,6 @@ def estimation():
                 for key,value in item.items():
                     if key=='size':
                         data=data+size_val[value]
-            #print(data)
             estimated_value = int(data/estim_data_len)
             return estimated_value
         estimated_value = estim_Calculation(type_of_task)
@@ -97,7 +86,7 @@ def estimation():
         estim_data = {"Estimated_effort" : estimated_value,"Confidence_level" : confidence_level,
             "Estemated_range" : estimated_range}
         # print(estim_data)
-        return jsonify(estim_data),200       
+        return render_template('estimationresult.html', estim_data=estim_data)       
     return render_template('estimationform.html')
 
 #Show list of estimations
@@ -106,6 +95,7 @@ def show_estimations():
     estimationdata = estim_collection.find()
     return render_template('estimationlist.html', estimationdata=estimationdata)
 
+#update the estimation from
 @app.route('/update_form/<string:id>', methods=['GET', 'POST'])
 def update_form(id):
     task= estim_collection.find_one({'_id':ObjectId(id)})
@@ -135,8 +125,6 @@ def update_form(id):
 def delete_estimation(id):
     estim_collection.delete_one({'_id': ObjectId(id)})
     return redirect('/estimation_data')
-
-
 
 #logout route
 @app.route('/logout')

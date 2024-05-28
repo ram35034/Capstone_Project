@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimation Result</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Estimation Result</h1>
+    <table>
+        <tr>
+            <th>Estimated Effort(hrs)</th>
+            <th>Confidence Level</th>
+            <th>Estimated Range</th>
+        </tr>
+        
+        <tr>
+            <td>{{ estim_data["Estimated_effort"] }}</td>
+            <td>{{ estim_data["Confidence_level"] }}</td>
+            <td>{{ estim_data["Estemated_range"] }}</td>
+        </tr>
+    </table>
+</body>
+</html>
